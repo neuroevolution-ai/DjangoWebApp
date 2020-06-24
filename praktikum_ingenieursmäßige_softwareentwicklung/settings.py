@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'django_mysql',
-    'django_tables2',
-    'semanticuiform'
+    'django_tables2'
 ]
 
 MIDDLEWARE = [
