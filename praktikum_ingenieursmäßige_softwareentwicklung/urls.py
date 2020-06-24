@@ -19,8 +19,8 @@ from app.views import create_config, ConfigListView, JobQueue, delete_job
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', create_config, name="config"),
-    path('db/', ConfigListView.as_view()),
+    path('', create_config, name="create_config"),
+    path('configurations/', ConfigListView.as_view(), name="configs"),
     path('jobs/', JobQueue.as_view(), name="jobqueue"),
     path('deleteJob/<job_id>', delete_job)
 ]

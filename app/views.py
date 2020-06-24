@@ -16,7 +16,7 @@ def create_config(request):
             return HttpResponseRedirect('/')
     else:
         form = ConfigForm()
-    return render(request, 'form.html', {'form': form})
+    return render(request, 'createConfig.html', {'form': form})
 
 
 class ConfigListView(SingleTableView):
