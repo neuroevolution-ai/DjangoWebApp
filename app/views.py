@@ -13,7 +13,7 @@ def create_config(request):
         form = ConfigForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/configurations')
     else:
         form = ConfigForm()
     return render(request, 'createConfig.html', {'form': form})
