@@ -6,6 +6,7 @@ class ConfigTable(tables.Table):
     class Meta:
         model = Config
         template_name = "django_tables2/bootstrap.html"
+        exclude = ('id', )
 
 
 class JobQueueTable(tables.Table):
@@ -15,10 +16,10 @@ class JobQueueTable(tables.Table):
         verbose_name=''
     )
 
+    # TODO: Felder nicht einzeln aufzählen!
     class Meta:
         model = Job
-        fields = ('id',
-                  'environment',
+        fields = ('environment',
                   'neural_network_type',
                   'random_seed',
                   'number_generations',
