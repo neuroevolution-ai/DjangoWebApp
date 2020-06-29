@@ -36,3 +36,4 @@ class JobQueueTable(tables.Table):
                   'episode_runner_keep_env_seed_fixed_during_generation',
                   'delete')
         template_name = "django_tables2/bootstrap.html"
+        orderable = False
