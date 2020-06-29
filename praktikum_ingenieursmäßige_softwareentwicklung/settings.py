@@ -106,11 +106,17 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+            'default': {
+                'format': '%(levelname)s %(asctime)s %(module)s %(message)s'
+            },
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.getcwd() + '/debug.log',
+            'formatter': 'default'
         },
     },
     'loggers': {

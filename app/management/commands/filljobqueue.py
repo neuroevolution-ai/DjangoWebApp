@@ -11,17 +11,22 @@ logger = logging.getLogger('root')
 class Command(BaseCommand):
     help = 'fills jobqueue every 10 seconds if number of jobs < 5'
 
+    def __init__(self):
+        super().__init__()
+        self.seconds_to_wait = 10
+        self.max_number_of_jobs = 5
+
     def handle(self, *args, **options):
         while True:
             try:
                 self.__add_jobs()
-                sleep(10)
+                sleep(self.seconds_to_wait)
             except Exception as e:
                 logger.error(e)
                 break
 
     def __add_jobs(self):
-        while Job.objects.count() < 5:
+        while Job.objects.count() < self.max_number_of_jobs:
             random_config = choice(Config.objects.all())
             job = self.__create_job_from_config(random_config)
             job.save()
