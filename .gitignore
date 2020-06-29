@@ -3,4 +3,4 @@
 db.sqlite3
 /app/migrations
 __pycache__/
-debug.log
+*.log

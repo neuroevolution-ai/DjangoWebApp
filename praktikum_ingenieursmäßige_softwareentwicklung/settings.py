@@ -112,19 +112,30 @@ LOGGING = {
             },
     },
     'handlers': {
-        'file': {
+        'debugfile': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.getcwd() + '/debug.log',
             'formatter': 'default'
         },
+        'infofile': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.getcwd() + '/training.log',
+            'formatter': 'default'
+        }
     },
     'loggers': {
         'root': {
-            'handlers': ['file'],
+            'handlers': ['debugfile'],
             'level': 'DEBUG',
             'propagate': True,
         },
+        'training': {
+            'handlers': ['infofile'],
+            'level': 'INFO',
+            'propagate': True
+        }
     },
 }
 
