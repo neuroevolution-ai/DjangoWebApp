@@ -45,6 +45,7 @@ class JobQueue(SingleTableView):
     template_name = "jobQueue.html"
 
 
+# TODO: Umlaute werden nicht korrekt angezeigt. Relevant?
 def show_log(request):
     path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'training.log')
     file = open(path)
