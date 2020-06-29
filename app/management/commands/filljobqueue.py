@@ -2,6 +2,9 @@ from django.core.management.base import BaseCommand
 from app.models import Job, Config
 from random import choice
 from time import sleep
+import logging
+
+logger = logging.getLogger('root')
 
 
 # TODO: Anzahl Minuten und Anzahl Jobs konfigurierbar machen
@@ -11,14 +14,18 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         while True:
             try:
-                while Job.objects.count() < 5:
-                    random_config = choice(Config.objects.all())
-                    job = self.__create_job_from_config(random_config)
-                    job.save()
+                self.__add_jobs()
                 sleep(10)
             except Exception as e:
-                print(e) # TODO: logfile oder ähnliches
+                logger.error(e)
                 break
+
+    def __add_jobs(self):
+        while Job.objects.count() < 5:
+            random_config = choice(Config.objects.all())
+            job = self.__create_job_from_config(random_config)
+            job.save()
+        return
 
     @staticmethod
     def __create_job_from_config(config):
