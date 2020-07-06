@@ -30,7 +30,7 @@ def delete_job(request, job_id):
     if request.method == 'POST':
         try:
             job = Job.objects.get(id=job_id)
-        except: # TODO: except job does not exist
+        except Job.DoesNotExist:
             return HttpResponse(status=404)
         data = request.POST
         method = data.get('_method', '').lower()
@@ -46,6 +46,8 @@ class JobQueue(SingleTableView):
 
 
 # TODO: Umlaute werden nicht korrekt angezeigt. Relevant?
+# TODO: lines vielleicht falsch herum auflisten? -> Neuste immer oben
+# TODO: lines nach gewisser Zeit löschen, damit Logfile nicht zu groß wird?
 def show_log(request):
     path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'training.log')
     file = open(path)

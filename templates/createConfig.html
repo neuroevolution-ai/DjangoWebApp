@@ -3,6 +3,7 @@
 {% block create_config %}
     <div style="width: 60%; margin: 25px auto 25px auto;">
         <h1 style="text-align: center;">Create new configuration</h1>
+        <p>Separate multiple values by comma.</p>
         <form action="/" method="post">
             {% csrf_token %}
             {{ form }}
