@@ -63,7 +63,7 @@ def move_job(request, job_id):
             Job.objects.filter(number=smallest).update(number=number)
             Job.objects.filter(id=job_id).update(number=smallest)
 
-            return HttpResponseRedirect('/jobs')
+            return HttpResponseRedirect('/jobs/?sort=number')
 
 
 def get_key(dictionary, val):
