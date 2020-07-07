@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import create_config, ConfigListView, JobQueue, delete_job, show_log
+from app.views import create_config, ConfigListView, JobQueue, delete_job, show_log, move_job
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +23,6 @@ urlpatterns = [
     path('configurations/', ConfigListView.as_view(), name="configs"),
     path('jobs/', JobQueue.as_view(), name="jobqueue"),
     path('deleteJob/<job_id>', delete_job),
-    path('logs/', show_log, name="logs")
+    path('logs/', show_log, name="logs"),
+    path('moveJob/<job_id>', move_job)
 ]

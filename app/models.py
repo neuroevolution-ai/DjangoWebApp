@@ -24,6 +24,7 @@ class Config(models.Model):
 
 
 class Job(models.Model):
+    number = models.IntegerField()
     environment = models.CharField(max_length=100)
     neural_network_type = models.CharField(max_length=100)
     random_seed = models.IntegerField()

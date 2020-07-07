@@ -8,11 +8,12 @@ logger = logging.getLogger('training')
 
 # TODO: updated README.md
 class Command(BaseCommand):
-    help = 'execute jobs from jobqueue'
+    help = 'executes jobs from job queue'
 
     def handle(self, *args, **options):
         while True:
             try:
+                # TODO: nicht nach ID, sondern nach number durchgehen
                 job = Job.objects.all()[0]
                 self.__create_json_from_job(job)
                 # TODO: execute job
