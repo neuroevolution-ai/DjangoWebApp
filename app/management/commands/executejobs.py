@@ -13,11 +13,16 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         while True:
             try:
-                # TODO: nicht nach ID, sondern nach number durchgehen
-                job = Job.objects.all()[0]
+                all_jobs = Job.objects.all()
+                all_numbers = []
+                for current in all_jobs:
+                    all_numbers.append(current.number)
+                smallest = min(all_numbers)
+                job = Job.objects.filter(number=smallest)[0]
                 self.__create_json_from_job(job)
                 # TODO: execute job
                 job.delete()
+                # TODO: logs leeren?
             except Exception as e:
                 logger.error(e)
                 break
@@ -54,6 +59,7 @@ class Command(BaseCommand):
         # delete unused keys
         configuration.pop('_state')
         configuration.pop('id')
+        configuration.pop('number')
         configuration.pop('trainer_sigma')
         configuration.pop('trainer_population_size')
         configuration.pop('brain_number_neurons')
@@ -68,4 +74,3 @@ class Command(BaseCommand):
 
         with open('Configuration.json', 'w') as file:
             json.dump(configuration, file)
-
