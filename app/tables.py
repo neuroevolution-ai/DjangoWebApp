@@ -26,4 +26,3 @@ class JobQueueTable(tables.Table):
         model = Job
         exclude = ('id', )
         template_name = "django_tables2/bootstrap.html"
-        orderable = False

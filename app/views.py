@@ -77,11 +77,6 @@ class JobQueue(SingleTableView):
     table_class = JobQueueTable
     template_name = "jobQueue.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['table'].order_by = 'number'
-        return context
-
 
 # TODO: Umlaute werden nicht korrekt angezeigt. Relevant?
 # TODO: lines vielleicht falsch herum auflisten? -> Neuste immer oben
