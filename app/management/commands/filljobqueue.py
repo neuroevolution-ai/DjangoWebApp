@@ -25,10 +25,11 @@ class Command(BaseCommand):
                 break
 
     def __add_jobs(self):
-        while Job.objects.count() < self.max_number_of_jobs:
-            random_config = choice(Config.objects.all()) # TODO: was, wenn es noch keine Configurations gibt?
-            job = self.__create_job_from_config(random_config)
-            job.save()
+        if Config.objects.count > 0:
+            while Job.objects.count() < self.max_number_of_jobs:
+                random_config = choice(Config.objects.all())
+                job = self.__create_job_from_config(random_config)
+                job.save()
         return
 
     def __create_job_from_config(self, config):
