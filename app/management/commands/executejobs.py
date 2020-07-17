@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from app.models import Job
 import logging
 import json
+import subprocess
 
 logger = logging.getLogger('training')
 
@@ -21,7 +22,13 @@ class Command(BaseCommand):
                     smallest = min(all_numbers)
                     job = Job.objects.filter(number=smallest)[0]
                     self.__create_json_from_job(job)
-                    # TODO: execute job
+                    # TODO: get paths from environment
+                    logger.info("Output for job no. " + str(job.number))
+                    with open('training.log', 'w') as outfile:
+                        result = subprocess.run(["/home/jap/Documents/NeuroEvolution-CTRNN_new/venv/bin/python3",
+                            "/home/jap/Documents/NeuroEvolution-CTRNN_new/neuro_evolution_ctrnn/train.py",
+                            "--configuration",
+                            "/home/jap/Documents/DjangoWebApp/Configuration.json"], stdout=outfile, stderr=outfile)
                     job.delete()
                     # TODO: logs leeren?
             except Exception as e:

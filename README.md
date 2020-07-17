@@ -31,3 +31,8 @@ python manage.py runserver
 ```
 python manage.py filljobqueue
 ```
+
+## Jobs ausführen:
+```
+python manage.py executejobs
+```
