@@ -23,6 +23,7 @@ class Command(BaseCommand):
                     job = Job.objects.filter(number=smallest)[0]
                     self.__create_json_from_job(job)
                     # TODO: get paths from environment
+                    # TODO: Logfile ansehen
                     logger.info("Output for job no. " + str(job.number))
                     with open('training.log', 'w') as outfile:
                         result = subprocess.run(["/home/jap/Documents/NeuroEvolution-CTRNN_new/venv/bin/python3",
