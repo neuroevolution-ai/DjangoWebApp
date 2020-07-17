@@ -14,15 +14,16 @@ class Command(BaseCommand):
         while True:
             try:
                 all_jobs = Job.objects.all()
-                all_numbers = []
-                for current in all_jobs:
-                    all_numbers.append(current.number)
-                smallest = min(all_numbers)
-                job = Job.objects.filter(number=smallest)[0]
-                self.__create_json_from_job(job)
-                # TODO: execute job
-                job.delete()
-                # TODO: logs leeren?
+                if len(all_jobs) > 0:
+                    all_numbers = []
+                    for current in all_jobs:
+                        all_numbers.append(current.number)
+                    smallest = min(all_numbers)
+                    job = Job.objects.filter(number=smallest)[0]
+                    self.__create_json_from_job(job)
+                    # TODO: execute job
+                    job.delete()
+                    # TODO: logs leeren?
             except Exception as e:
                 logger.error(e)
                 break
