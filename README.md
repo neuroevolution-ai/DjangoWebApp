@@ -33,6 +33,9 @@ python manage.py filljobqueue
 ```
 
 ## Jobs ausführen:
+Bevor die Jobs ausgeführt werden können, müssen zwei Umgebungsvariablen erstellt werden. Die erste sollte auf python3 in der venv, die von NeuroEvolution-CTRNN_new benutzt wird (unter Linux: venv/bin/python3) gesetzt werden, die zweite auf train.py.
 ```
+export NEURO_EVOLUTION_PYTHON=${PATH_TO_PYTHON}
+export TRAINING=${PATH_TO_TRAIN.PY}
 python manage.py executejobs
 ```

@@ -3,13 +3,19 @@ from app.models import Job
 import logging
 import json
 import subprocess
+from time import sleep
+import os
 
-logger = logging.getLogger('training')
+logger = logging.getLogger("training")
+
+python_neuroevolution = os.getenv("NEURO_EVOLUTION_PYTHON")
+training = os.getenv("TRAINING")
+
+config_file = "Configuration.json"
 
 
-# TODO: update README.md
 class Command(BaseCommand):
-    help = 'executes jobs from job queue'
+    help = "executes jobs from job queue"
 
     def handle(self, *args, **options):
         while True:
@@ -22,16 +28,17 @@ class Command(BaseCommand):
                     smallest = min(all_numbers)
                     job = Job.objects.filter(number=smallest)[0]
                     self.__create_json_from_job(job)
-                    # TODO: get paths from environment
-                    # TODO: Logfile ansehen
                     logger.info("Output for job no. " + str(job.number))
-                    with open('training.log', 'w') as outfile:
-                        result = subprocess.run(["/home/jap/Documents/NeuroEvolution-CTRNN_new/venv/bin/python3",
-                            "/home/jap/Documents/NeuroEvolution-CTRNN_new/neuro_evolution_ctrnn/train.py",
+                    with open("training.log", "a") as outfile:
+                        result = subprocess.run([python_neuroevolution,
+                            training,
                             "--configuration",
-                            "/home/jap/Documents/DjangoWebApp/Configuration.json"], stdout=outfile, stderr=outfile)
+                            config_file], stdout=outfile, stderr=outfile)
                     job.delete()
                     # TODO: logs leeren?
+                else:
+                    logger.info("No more jobs in job queue.")
+                    sleep(10)
             except Exception as e:
                 logger.error(e)
                 break
@@ -82,5 +89,5 @@ class Command(BaseCommand):
             'max_steps_penalty': job.episode_runner_max_steps_penalty
         }
 
-        with open('Configuration.json', 'w') as file:
+        with open(config_file, 'w') as file:
             json.dump(configuration, file)
