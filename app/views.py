@@ -29,25 +29,27 @@ class ConfigListView(SingleTableView):
 def delete_job(request, job_id):
     if request.method == 'POST':
         try:
-            job = Job.objects.get(id=job_id)
+            job, method, data = get_job_method_and_data(request, job_id)
         except Job.DoesNotExist:
             return HttpResponse(status=404)
-        data = request.POST
-        method = data.get('_method', '').lower()
         if method == 'delete':
             job.delete()
             return HttpResponseRedirect('/jobs')
 
 
-# TODO: DRY (s.o.)
+def get_job_method_and_data(request, job_id):
+    job = Job.objects.get(id=job_id)
+    data = request.POST
+    method = data.get('_method', '').lower()
+    return job, method, data
+
+
 def move_job(request, job_id):
     if request.method == 'POST':
         try:
-            job = Job.objects.get(id=job_id)
+            job, method, data = get_job_method_and_data(request, job_id)
         except Job.DoesNotExist:
             return HttpResponse(status=404)
-        data = request.POST
-        method = data.get('_method', '').lower()
         if method == 'move':
             number = job.number
             all_jobs = Job.objects.all()
