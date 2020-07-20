@@ -56,7 +56,6 @@ def move_job(request, job_id):
             for current_job in all_jobs:
                 all_numbers.append(current_job.number)
 
-            # TODO: was, wenn numbers_greater_than_number == []?
             numbers_greater_than_number = [n for n in all_numbers if n > number]
             smallest = min(numbers_greater_than_number)
 
@@ -78,9 +77,6 @@ class JobQueue(SingleTableView):
     template_name = "jobQueue.html"
 
 
-# TODO: Umlaute werden nicht korrekt angezeigt. Relevant?
-# TODO: lines vielleicht falsch herum auflisten? -> Neuste immer oben
-# TODO: lines nach gewisser Zeit löschen, damit Logfile nicht zu groß wird?
 def show_log(request):
     path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'training.log')
     file = open(path)

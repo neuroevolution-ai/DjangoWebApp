@@ -4,4 +4,10 @@
 {% block  jobqueue %}
     <h1 style="text-align: center">Job Queue</h1>
     {% render_table table %}
+    <script>
+        const table = document.getElementsByClassName("table")[0];
+        const last_row = table.rows[table.rows.length - 1];
+        const last_cell = last_row.cells[last_row.cells.length - 1];
+        last_cell.style.visibility = 'hidden';
+    </script>
 {% endblock %}
