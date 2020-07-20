@@ -6,8 +6,6 @@ from app.models import Config, Job
 from app.tables import ConfigTable, JobQueueTable
 import os
 
-# Create your views here.
-
 
 def create_config(request):
     if request.method == 'POST':

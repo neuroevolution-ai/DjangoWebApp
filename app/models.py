@@ -2,8 +2,6 @@ from django.db import models
 from django_mysql.models import ListCharField
 
 
-# Create your models here.
-
 class Config(models.Model):
     environment = ListCharField(base_field=models.CharField(max_length=100), max_length=(10 * 100))
     random_seed = ListCharField(base_field=models.IntegerField(), max_length=(10 * 100))
