@@ -3,10 +3,15 @@
 {% block logs %}
     <div style="width: 60%; margin: 25px auto 25px auto;">
         <h1 style="text-align: center;">Logs</h1>
-        <div class="card text-white bg-dark mb-3" style="margin-top: 10px;">
+        <div id="log" class="card text-white bg-dark mb-3" style="margin-top: 10px; height: 500px; overflow-y: auto;">
             {% for line in lines %}
                 <p>{{ line }}</p>
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        const div = document.getElementById("log");
+        div.scrollTop = div.scrollHeight;
+    </script>
 {% endblock %}
