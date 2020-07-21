@@ -13,5 +13,8 @@
     <script>
         const div = document.getElementById("log");
         div.scrollTop = div.scrollHeight;
+        setTimeout(function(){
+            window.location.reload();
+        }, 10000);
     </script>
 {% endblock %}
