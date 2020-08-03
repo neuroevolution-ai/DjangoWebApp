@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ```
 
 ## App starten:
-Bevor die App ausgeführt werden kann, muss der Secret Key für Django über eine Umgebungsvariable gesetzt werden.
+Bevor die App ausgeführt werden kann, muss der Secret Key für Django über eine Umgebungsvariable gesetzt werden. Dieser darf nicht leer sein.
 ```
 export SECRET_KEY=${SECRET_KEY}
 python manage.py makemigrations
